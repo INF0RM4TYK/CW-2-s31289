@@ -30,13 +30,13 @@ public abstract class Kontener
 
 
 
-    public virtual void empty()
+    public virtual void Empty()
     {
         Weight = 0;
     }
 
 
-    public virtual void load(double weight)
+    public virtual void Load(double weight)
     {
         
         
