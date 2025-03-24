@@ -18,13 +18,12 @@ public abstract class Kontener
 
 
 
-    public Kontener(double weight, double height, double tareWeight, double depth, string serialNumber ,double maxLoad)
+    public Kontener(char type, double height, double tareWeight, double depth, double maxLoad)
     {
-        Weight = weight;
         Height = height;
         TareWeight = tareWeight;
         Depth = depth;
-        SerialNumber = serialNumber;
+        SerialNumber = $"KON-{type}-{nextSerial++}";
         MaxLoad = maxLoad;
     }
 
@@ -38,11 +37,28 @@ public abstract class Kontener
 
     public virtual void Load(double weight)
     {
+        if (weight < 0 || weight > MaxLoad)
+        {
+            
+            throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
+        }
         
-        
-        
+        Weight += weight;
     }
-
-
-
+    
+    public virtual void Unload(double weight)
+    {
+        if (weight < 0 || weight > MaxLoad)
+        {
+            throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
+        }
+        
+        Weight -= weight;
+    }
+    
 }
+
+public class OverfillException : Exception
+{
+    public OverfillException(string message) : base(message) { }
+}   
