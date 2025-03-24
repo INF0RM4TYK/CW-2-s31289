@@ -34,7 +34,7 @@ public abstract class Kontener
         Weight = 0;
     }
 
-
+    
     public virtual void Load(double weight)
     {
         if (weight < 0 || weight > MaxLoad)
@@ -43,7 +43,9 @@ public abstract class Kontener
             throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
         }
         
-        Weight += weight;
+        Weight = weight;
+        
+        
     }
     
     public virtual void Unload(double weight)
@@ -53,7 +55,7 @@ public abstract class Kontener
             throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
         }
         
-        Weight -= weight;
+        Weight = weight;
     }
     
 }
