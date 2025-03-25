@@ -6,18 +6,15 @@ public class GasContainer : Kontener, IHazardNotifier
     public double AtmosphericPressure { get; set; }
 
 
-    public GasContainer(double height, double tareWeight, double depth, double maxLoad) : base('G', height, tareWeight, depth, maxLoad)
+    public GasContainer(double height, double tareWeight, double depth, double maxLoad, double atmosphericPressure) : base('G', height, tareWeight, depth, maxLoad)
     {
-        
-        
-        
-        
+        AtmosphericPressure = atmosphericPressure;
     }
 
 
     public override void Empty()
     {
-        Weight *= 0.05;
+        
     }
 
 

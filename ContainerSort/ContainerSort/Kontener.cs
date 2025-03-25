@@ -9,7 +9,7 @@ public abstract class Kontener
 
     private static int nextSerial = 0;
 
-    public double Weight { get; set; }
+    protected double LoadWeight { get; set; }
     public double Height { get; set; }
     public double TareWeight { get; set; }
     public double Depth { get; set; }
@@ -31,7 +31,7 @@ public abstract class Kontener
 
     public virtual void Empty()
     {
-        Weight = 0;
+        LoadWeight = 0;
     }
 
     
@@ -39,13 +39,11 @@ public abstract class Kontener
     {
         if (weight < 0 || weight > MaxLoad)
         {
-            
             throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
         }
         
-        Weight = weight;
-        
-        
+        LoadWeight += weight;
+
     }
     
     // public virtual void Unload(double weight)
@@ -57,7 +55,11 @@ public abstract class Kontener
     //     
     //     Weight -= weight;
     // }
-    
+
+    public double getLoad()
+    {
+        return LoadWeight;
+    }
 }
 
 public class OverfillException : Exception

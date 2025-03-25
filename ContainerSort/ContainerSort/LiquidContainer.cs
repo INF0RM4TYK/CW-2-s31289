@@ -26,7 +26,10 @@ public class LiquidContainer : Kontener, IHazardNotifier
         }
 
         base.Load(weight);
-        Console.WriteLine($"Zaladowano kontener plynem o ilosci {weight}");
+        string isDanger = IsDangerous ? ", jest on niebezpieczny (max 50%)" : ", jest bezpieczny (max 90%)";
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o ilosci {weight}{isDanger}");
+        
+        
         
     }
 

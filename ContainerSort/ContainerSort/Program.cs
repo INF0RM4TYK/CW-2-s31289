@@ -13,9 +13,11 @@ class Program
         try
         {
             LiquidContainer container = new LiquidContainer(250, 500, 200, 10000, true);
-            container.Empty();
-            container.Load(5100);
-            Console.WriteLine("Ilosc ladunku dla danego kontenera " + container.Weight);
+            
+            // container.Empty();
+            container.Load(3000);
+            Console.WriteLine("Ilosc ladunku dla danego kontenera " + container.getLoad());
+         
         }
         catch (OverfillException ex)
         {
