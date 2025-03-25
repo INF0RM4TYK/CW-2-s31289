@@ -42,6 +42,8 @@ class Program
         ship1.AddKontener(gasContainer);
         ship1.AddKontener(refrigeratedContainer);
         
+        
+        
         // -> Wypisywanie informacji o statku
         Console.WriteLine("------------------------------------------"); 
         Console.WriteLine();
@@ -90,6 +92,7 @@ class Program
         
         
         ship1.EmptyStatekFromKontener(refrigeratedContainer.SerialNumber);
+        
         // ship1.WypisujInfoOStatku();
         // ship2.WypisujInfoOStatku();
 

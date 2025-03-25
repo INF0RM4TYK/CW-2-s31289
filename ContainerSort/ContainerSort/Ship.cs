@@ -7,7 +7,7 @@ public class Ship
     public double MaxSpeed { get; set; }
     public int MaxContainers { get; set; }
     public double MaxContainersLoadWeight { get; set; }
-    private List<Kontener?> _konteners = new List<Kontener?>();
+    public List<Kontener?> _konteners = new List<Kontener?>();
    
 
 
