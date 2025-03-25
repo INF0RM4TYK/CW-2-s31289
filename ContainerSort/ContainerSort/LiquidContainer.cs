@@ -8,6 +8,7 @@ public class LiquidContainer : Kontener, IHazardNotifier
     public LiquidContainer(double height, double tareWeight, double depth, double maxLoad, bool isDangerous)
         : base('L', height, tareWeight, depth, maxLoad)    // L - Liquid
     {
+        
         IsDangerous = isDangerous;
     }
 
@@ -26,8 +27,7 @@ public class LiquidContainer : Kontener, IHazardNotifier
         }
 
         base.Load(weight);
-        string isDanger = IsDangerous ? ", jest on niebezpieczny (max 50%)" : ", jest bezpieczny (max 90%)";
-        Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o ilosci {weight}{isDanger}");
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o wadze {weight}");
         
         
         
@@ -38,4 +38,13 @@ public class LiquidContainer : Kontener, IHazardNotifier
     {
         Console.WriteLine($"Wysyłam notyfikację: {message} dla kontenera {containerSerialNumber}");
     }
+    
+    
+    public override string ToString()
+    {
+        string isDanger = IsDangerous ? " niebezpieczny ladunek (max 50%)" : " bezpieczny ladunek (max 90%)";
+        return base.ToString() + $". Jest to{isDanger}";
+    }
+    
+    
 }

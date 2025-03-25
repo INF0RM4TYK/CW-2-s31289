@@ -14,13 +14,28 @@ public class GasContainer : Kontener, IHazardNotifier
 
     public override void Empty()
     {
+        LoadWeight *= 0.05; 
+        Console.WriteLine($"Oprozniono kontener {SerialNumber}, aktualna ilosc gazu {LoadWeight} wynoszaca 5% ladunku");
         
     }
 
+
+    public override void Load(double weight)
+    {
+
+        base.Load(weight);
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} gazem o wadze {weight}");
+    }
 
     public void NotifyHazard(string message, string containerSerialNumber)
     {
         Console.WriteLine($"Wysyłam notyfikację: {message} dla kontenera {containerSerialNumber}");
        
+    }
+    
+    
+    public override string ToString()
+    {
+        return base.ToString() + $". Ciśnienie: {AtmosphericPressure} atm";
     }
 }

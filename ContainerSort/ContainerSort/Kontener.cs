@@ -32,6 +32,7 @@ public abstract class Kontener
     public virtual void Empty()
     {
         LoadWeight = 0;
+        Console.WriteLine($"Oprozniono kontener {SerialNumber}");
     }
 
     
@@ -56,9 +57,18 @@ public abstract class Kontener
     //     Weight -= weight;
     // }
 
-    public double getLoad()
+    public double GetLoad()
     {
         return LoadWeight;
+    }
+    
+    
+    
+    
+    public override string ToString()
+    {
+        return $"[ Numer seryjny: {SerialNumber}, Typ: {SerialNumber[4]}, Ładunek: {LoadWeight} kg, " +
+               $"Wysokość: {Height} cm, Waga własna: {TareWeight} kg, Głębokość: {Depth} cm, Max ładunek: {MaxLoad} kg ]";
     }
 }
 
