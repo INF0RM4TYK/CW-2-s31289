@@ -6,19 +6,29 @@ public class RefrigeratedContainer : Kontener, IHazardNotifier
     public double Temperature { get; set; }
 
 
-    public RefrigeratedContainer(char type, double height, double tareWeight, double depth, double maxLoad) : base(type, height, tareWeight, depth, maxLoad)
+    public RefrigeratedContainer(double height, double tareWeight, double depth, double maxLoad, string productType, double temperature) : base('C', height, tareWeight, depth, maxLoad)
     {
-        
-        
-        
-        
+        ProductType = productType;
+        Temperature = temperature;
     }
-    
+
+
+    public override void Load(double weight)
+    {
+        base.Load(weight);
+        //NotifyHazard("",SerialNumber);
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + $". Typ produktu: {ProductType}, Temperatura: {Temperature}°C";
+    }
     
     
 
     public void NotifyHazard(string message, string containerSerialNumber)
     {
-        throw new NotImplementedException();
+        
+        Console.WriteLine($"Wysyłam notyfikację: {message} dla kontenera {containerSerialNumber}");
     }
 }

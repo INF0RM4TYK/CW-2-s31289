@@ -20,8 +20,8 @@ public class LiquidContainer : Kontener, IHazardNotifier
         
         if (weight > maxFill)
         {
-            string message = "[Próba przeładowania kontenera]";
-            NotifyHazard(message, SerialNumber);
+            string message = "[Ostrzezenie!]";
+            //NotifyHazard(message, SerialNumber);
             throw new OverfillException(message);
             
         }
