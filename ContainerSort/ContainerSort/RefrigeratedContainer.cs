@@ -1,6 +1,6 @@
 namespace ContainerSort;
 
-public class RefrigeratedContainer : Kontener, IHazardNotifier
+public class RefrigeratedContainer : Kontener
 {
     public string ProductType { get; set; }
     public double Temperature { get; set; }
@@ -15,8 +15,16 @@ public class RefrigeratedContainer : Kontener, IHazardNotifier
 
     public override void Load(double weight)
     {
+
+        if (weight > MaxLoad)
+        {
+            throw new OverfillException($"Za duzo produktu w kontenerze {SerialNumber}");
+        }
+        
+        
+
         base.Load(weight);
-        //NotifyHazard("",SerialNumber);
+      
     }
 
     public override string ToString()
@@ -26,9 +34,5 @@ public class RefrigeratedContainer : Kontener, IHazardNotifier
     
     
 
-    public void NotifyHazard(string message, string containerSerialNumber)
-    {
-        
-        Console.WriteLine($"Wysyłam notyfikację: {message} dla kontenera {containerSerialNumber}");
-    }
+   
 }
