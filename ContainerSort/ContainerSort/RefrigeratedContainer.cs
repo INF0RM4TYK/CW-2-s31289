@@ -2,10 +2,10 @@ namespace ContainerSort;
 
 public class RefrigeratedContainer : Kontener
 {
-    public string ProductType { get; set; }
+    public string? ProductType { get; set; }
     public double Temperature { get; set; }
 
-    public Dictionary<string, double> TempOfExacItem = new Dictionary<string, double>()
+    public Dictionary<string?, double> TempOfExacItem = new Dictionary<string?, double>()
     {
         { "Bananas", 13.3 },
         { "Chocolate", 18 },
@@ -23,7 +23,7 @@ public class RefrigeratedContainer : Kontener
     
     
 
-    public RefrigeratedContainer(double height, double tareWeight, double depth, double maxLoad, string productType, double temperature) : base('C', height, tareWeight, depth, maxLoad)
+    public RefrigeratedContainer(double height, double tareWeight, double depth, double maxLoad, string? productType, double temperature) : base('C', height, tareWeight, depth, maxLoad)
     {
         ProductType = productType;
         Temperature = temperature;
@@ -35,7 +35,7 @@ public class RefrigeratedContainer : Kontener
     {
         if (ProductType != GetProductType())
         {
-            throw new InvalidOperationException(
+            throw new WrongItemsException(
                 $"W kontenerze {SerialNumber} moga znajdowac sie tylko produkty typu {ProductType}");
         }
 
@@ -49,7 +49,7 @@ public class RefrigeratedContainer : Kontener
 
         }
         
-        Console.WriteLine($"Zaladowano kontener {SerialNumber} produktami o wadze {weight}");
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} produktem {ProductType} o wadze {weight}");
     }
 
 
@@ -58,14 +58,20 @@ public class RefrigeratedContainer : Kontener
 
         if (this.Temperature > TempOfExacItem[ProductType])
         {
-            throw new ArgumentOutOfRangeException($"Temperatura dla produktu {ProductType} powinna wynosic conajmniej {TempOfExacItem[ProductType]}°C. Zadana temperatura {Temperature}");
+            throw new WrongTempException($"Temperatura dla produktu {ProductType} powinna wynosic conajmniej {TempOfExacItem[ProductType]}°C. Zadana temperatura {Temperature}");
         }
+    }
+
+    public void SetProductType(string? productType)
+    {
+        ProductType = productType;
+        CheckTemperature();
     }
 
 
     public string GetProductType()
     {
-        return ProductType;
+        return LoadWeight > 0 ? ProductType : null;
     }
 
     public override string ToString()
@@ -77,3 +83,13 @@ public class RefrigeratedContainer : Kontener
 
    
 }
+
+public class WrongItemsException : Exception
+{
+    public WrongItemsException(string message) : base(message) { }
+}   
+
+public class WrongTempException : Exception
+{
+    public WrongTempException(string message) : base(message) { }
+}   
