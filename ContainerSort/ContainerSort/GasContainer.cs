@@ -34,7 +34,7 @@ public class GasContainer : Kontener, IHazardNotifier
             NotifyHazard(message, SerialNumber);
             
         }
-        Console.WriteLine($"Zaladowano kontener {SerialNumber} gazem o wadze {weight}");
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} gazem o wadze {weight} kg");
     }
 
     public void NotifyHazard(string message, string containerSerialNumber)

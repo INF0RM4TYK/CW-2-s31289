@@ -31,7 +31,7 @@ public class LiquidContainer : Kontener, IHazardNotifier
             
         }
 
-        Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o wadze {weight}");
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o wadze {weight} kg");
         
         
         

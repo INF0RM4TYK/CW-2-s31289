@@ -49,7 +49,7 @@ public class RefrigeratedContainer : Kontener
 
         }
         
-        Console.WriteLine($"Zaladowano kontener {SerialNumber} produktem {ProductType} o wadze {weight}");
+        Console.WriteLine($"Zaladowano kontener {SerialNumber} produktem {ProductType} o wadze {weight} kg");
     }
 
 
