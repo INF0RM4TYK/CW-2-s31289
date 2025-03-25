@@ -27,14 +27,19 @@ public class RefrigeratedContainer : Kontener
     {
         ProductType = productType;
         Temperature = temperature;
+        CheckTemperature();  // -> trzeba sprawdzic temperature
     }
 
 
     public override void Load(double weight)
     {
+        if (ProductType != GetProductType())
+        {
+            throw new InvalidOperationException(
+                $"W kontenerze {SerialNumber} moga znajdowac sie tylko produkty typu {ProductType}");
+        }
+
         base.Load(weight);
-        
-        
         
         
         if (LoadWeight > MaxLoad)
@@ -45,6 +50,22 @@ public class RefrigeratedContainer : Kontener
         }
         
         Console.WriteLine($"Zaladowano kontener {SerialNumber} produktami o wadze {weight}");
+    }
+
+
+    private void CheckTemperature()
+    {
+
+        if (this.Temperature > TempOfExacItem[ProductType])
+        {
+            throw new ArgumentOutOfRangeException($"Temperatura dla produktu {ProductType} powinna wynosic conajmniej {TempOfExacItem[ProductType]}°C. Zadana temperatura {Temperature}");
+        }
+    }
+
+
+    public string GetProductType()
+    {
+        return ProductType;
     }
 
     public override string ToString()
