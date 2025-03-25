@@ -20,7 +20,7 @@ public class Ship
     }
 
 
-    public void AddKontener(Kontener? kontener)
+    public void AddKontener(Kontener kontener)
     {
 
         if (_konteners.Count >= MaxContainers)
@@ -102,14 +102,13 @@ public class Ship
         
     }
 
-    public void EmptyKontener(string kontenerSerialNumber)
+    public void EmptyStatekFromKontener(string kontenerSerialNumber)
     {
         Kontener kontenerDoEmptyowania = _konteners.FirstOrDefault(k => k.SerialNumber == kontenerSerialNumber);
 
         if (kontenerDoEmptyowania != null)
         {
             kontenerDoEmptyowania.Empty();
-            Console.WriteLine($"Opróżniono kontener {kontenerSerialNumber} na statku {ShipSerialNumber}");
         }
 
 
@@ -121,25 +120,26 @@ public class Ship
         
         Console.WriteLine($"Statek: {ShipSerialNumber}");
         Console.WriteLine($"V-max: {MaxSpeed} wezlow");
-        Console.Write($"Max kontenerow: {MaxContainers}");
-        Console.Write($"Max ladownosc: {MaxContainersLoadWeight} t");
+        Console.WriteLine($"Max kontenerow: {MaxContainers}");
+        Console.WriteLine($"Max ladownosc: {MaxContainersLoadWeight} t");
         Console.WriteLine("Lista kontenerow na statku: ");
 
         foreach (var kontener in _konteners)
         {
-            
-        }
-
-        {
-            
+            Console.WriteLine(kontener);
         }
         
+        
+        Console.WriteLine($"Lacznie kontenerow: {_konteners.Count} o wadze {_konteners.Sum(k => k.GetLoad() + k.TareWeight) / 1000 } tons na statku {ShipSerialNumber}");
     }
 
 
 
 
-
+    public Kontener GetKooontener(string kontenerSerialNumber)
+    {
+        return _konteners.FirstOrDefault(c => c.SerialNumber == kontenerSerialNumber);
+    }
 
 
 
