@@ -2,5 +2,5 @@ namespace ContainerSort;
 
 public interface IHazardNotifier
 {
-    void NotifyHazard(string message);
+    public void NotifyHazard(string message, string containerSerialNumber);
 }
