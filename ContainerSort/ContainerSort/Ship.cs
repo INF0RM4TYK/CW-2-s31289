@@ -7,7 +7,7 @@ public class Ship
     public double MaxSpeed { get; set; }
     public int MaxContainers { get; set; }
     public double MaxContainersLoadWeight { get; set; }
-    private List<Kontener> _konteners = new List<Kontener>();
+    private List<Kontener?> _konteners = new List<Kontener?>();
    
 
 
@@ -20,7 +20,7 @@ public class Ship
     }
 
 
-    public void AddKontener(Kontener kontener)
+    public void AddKontener(Kontener? kontener)
     {
 
         if (_konteners.Count >= MaxContainers)
@@ -48,16 +48,98 @@ public class Ship
     }
 
 
-    public void AddKonteners(List<Kontener> kontenersToAdd)
+    public void AddKonteners(List<Kontener?> kontenersToAdd)
     {
         foreach (var kontener in kontenersToAdd)
         {
             AddKontener(kontener);
         }
     }
-    
-    
-    
+
+    public void RemoveKontener(string serialNumber)
+    {
+        Kontener? kontenerDoUsuniecia = _konteners.FirstOrDefault(k => k.SerialNumber == serialNumber);
+        if (kontenerDoUsuniecia != null)
+        {
+            Console.WriteLine($"Usunieto kontener {kontenerDoUsuniecia} ze statku {ShipSerialNumber}");
+            _konteners.Remove(kontenerDoUsuniecia);
+        }
+        else
+        {
+            throw new ArgumentException($"Kontener {serialNumber} nie znajduje sie na statku {ShipSerialNumber}");
+        }
+    }
+
+
+    public void ZamienKontener(string kontenerSerialNumber, Kontener nowyKontener)
+    {
+        RemoveKontener(kontenerSerialNumber);
+        AddKontener(nowyKontener);
+        Console.WriteLine($"Zastapiono kontener {kontenerSerialNumber} kontenerem {nowyKontener.SerialNumber} na statku o numerze {ShipSerialNumber}");
+        
+    }
+
+
+    public void PrzeniesNaInnyStatek(Ship shipDoKtoregoChcemyPrzeniesc, string kontenerSerialNumber)
+    {
+        
+        Kontener kontenerDoTransferowania = _konteners.FirstOrDefault(k => k.SerialNumber == kontenerSerialNumber);// iterujemy ziomeczka i znajdujemy ten ktory ma same serial number 
+
+        if (kontenerDoTransferowania != null)
+        {
+            try
+            {
+                shipDoKtoregoChcemyPrzeniesc.AddKontener(kontenerDoTransferowania);
+                _konteners.Remove(kontenerDoTransferowania);
+                Console.WriteLine(
+                    $"Przeniesiono kontener {kontenerSerialNumber} ze statku {ShipSerialNumber} na statek {shipDoKtoregoChcemyPrzeniesc.ShipSerialNumber}");
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        
+    }
+
+    public void EmptyKontener(string kontenerSerialNumber)
+    {
+        Kontener kontenerDoEmptyowania = _konteners.FirstOrDefault(k => k.SerialNumber == kontenerSerialNumber);
+
+        if (kontenerDoEmptyowania != null)
+        {
+            kontenerDoEmptyowania.Empty();
+            Console.WriteLine($"Opróżniono kontener {kontenerSerialNumber} na statku {ShipSerialNumber}");
+        }
+
+
+    }
+
+
+    public void WypisujInfoOStatku()
+    {
+        
+        Console.WriteLine($"Statek: {ShipSerialNumber}");
+        Console.WriteLine($"V-max: {MaxSpeed} wezlow");
+        Console.Write($"Max kontenerow: {MaxContainers}");
+        Console.Write($"Max ladownosc: {MaxContainersLoadWeight} t");
+        Console.WriteLine("Lista kontenerow na statku: ");
+
+        foreach (var kontener in _konteners)
+        {
+            
+        }
+
+        {
+            
+        }
+        
+    }
+
+
+
+
+
 
 
 
