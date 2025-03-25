@@ -22,16 +22,18 @@ public class GasContainer : Kontener, IHazardNotifier
 
     public override void Load(double weight)
     {
-
-        if (weight > MaxLoad)
+        base.Load(weight);
+        
+        
+        
+        
+        if (LoadWeight > MaxLoad)
         {
-            string message = $"Próba przeładowania kontenera! Max: {MaxLoad} kg, Aktualna proba: {weight} kg";
+            LoadWeight -= weight;
+            string message = $"Próba przeładowania kontenera! Max: {MaxLoad} kg, Aktualnie kontener posiada: {LoadWeight} kg";
             NotifyHazard(message, SerialNumber);
             
         }
-
-
-        base.Load(weight);
         Console.WriteLine($"Zaladowano kontener {SerialNumber} gazem o wadze {weight}");
     }
 

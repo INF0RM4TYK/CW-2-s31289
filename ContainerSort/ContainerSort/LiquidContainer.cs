@@ -18,15 +18,19 @@ public class LiquidContainer : Kontener, IHazardNotifier
 
         double maxFill = IsDangerous ? MaxLoad * 0.5 : MaxLoad * 0.9;
         
-        if (weight > maxFill)
+
+        base.Load(weight);
+
+
+        if (LoadWeight > maxFill)
         {
-            string message = $"Próba przeładowania kontenera! Max: {maxFill} kg, Aktualna proba: {weight} kg";
+            LoadWeight -= weight;
+            string message = $"Próba przeładowania kontenera! Max: {maxFill} kg, Aktualnie kontener posiada: {LoadWeight} kg";
             NotifyHazard(message, SerialNumber);
             throw new OverfillException(message);
             
         }
 
-        base.Load(weight);
         Console.WriteLine($"Zaladowano kontener {SerialNumber} plynem o wadze {weight}");
         
         

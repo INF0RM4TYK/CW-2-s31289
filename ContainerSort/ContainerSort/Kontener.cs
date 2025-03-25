@@ -38,12 +38,17 @@ public abstract class Kontener
     
     public virtual void Load(double weight)
     {
-        if (weight < 0 || weight > MaxLoad)
+        
+        LoadWeight += weight;
+        
+        
+        if (weight < 0 || LoadWeight > MaxLoad)
         {
+            LoadWeight -= weight;
             throw new OverfillException("Za duzo ladunku lub niepoprawna wartosc!");
         }
         
-        LoadWeight += weight;
+        
 
     }
     
