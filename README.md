@@ -1,2 +1,3 @@
 # CW-2-s31289
-Jest to projekt na APBD-pjatk
+
+An application that categorizes virtual containers according to their intended use
